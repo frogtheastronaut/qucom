@@ -1,4 +1,5 @@
 use qucom_rs::circuits::QuantumCircuit;
+use qucom_rs::visualise::{state_probabilities, plot_probabilities};
 
 fn main() {
     // 1. Create a 3-qubit circuit
@@ -34,5 +35,12 @@ fn main() {
     println!("\nSampling measurement 10 times:");
     for _ in 0..10 {
         println!("{}", qc.measure());
+    }
+
+    // 8. Visualise state probabilities
+    let probs = state_probabilities(&qc.state);
+    match plot_probabilities(&probs, "output.png") {
+        Ok(_) => println!("\nProbability distribution plot saved.'"),
+        Err(e) => eprintln!("Error generating plot: {}", e),
     }
 }
