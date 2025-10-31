@@ -16,11 +16,16 @@ fn main() {
     println!("\nAfter applying H to qubit 1:");
     println!("{:?}", qc.state);
 
-    // 4. Measure
+    // 4. Apply Hadamard to qubit 2
+    qc.h(2);
+    println!("\nAfter applying H to qubit 2:");
+    println!("{:?}", qc.state);
+
+    // 5. Measure
     let result = qc.measure();
     println!("\nMeasurement result: {}", result);
 
-    // 5. Run multiple measurements to see probabilities
+    // 6. Run multiple measurements to see probabilities
     println!("\nSampling measurement 10 times:");
     for _ in 0..10 {
         println!("{}", qc.measure());
