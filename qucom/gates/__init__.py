@@ -1,3 +1,3 @@
-from .gates import HADAMARD
+from .gates import HADAMARD, PAULI_X
 
-__all__ = ['HADAMARD']
+__all__ = ['HADAMARD', 'PAULI_X']
