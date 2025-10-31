@@ -21,11 +21,16 @@ fn main() {
     println!("\nAfter applying H to qubit 2:");
     println!("{:?}", qc.state);
 
-    // 5. Measure
+    // 5. Apply CNOT with qubit 0 as control and qubit 1 as target
+    qc.cx(0, 1);
+    println!("\nAfter applying CNOT (control: qubit 0, target: qubit 1):");
+    println!("{:?}", qc.state);
+
+    // 6. Measure
     let result = qc.measure();
     println!("\nMeasurement result: {}", result);
 
-    // 6. Run multiple measurements to see probabilities
+    // 7. Run multiple measurements to see probabilities
     println!("\nSampling measurement 10 times:");
     for _ in 0..10 {
         println!("{}", qc.measure());

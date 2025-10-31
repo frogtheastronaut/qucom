@@ -17,46 +17,53 @@ pub fn zero_state(n_qubits: usize) -> Array2<Complex64> {
     state
 }
 
-/// Apply a single-qubit gate to a target qubit
-pub fn apply_gate(state: &Array2<Complex64>, gate: &Array2<Complex64>, target: usize, n_qubits: usize) -> Array2<Complex64> {
+/// Apply gate
+pub fn apply_gate(
+    state: &Array2<Complex64>,
+    gate: &Array2<Complex64>,
+    qubit_index: usize,
+    n_qubits: usize,
+) -> Array2<Complex64> {
     let mut op = Array2::<Complex64>::from_shape_vec((1, 1), vec![Complex64::new(1.0, 0.0)]).unwrap();
     let eye = Array2::<Complex64>::eye(2);
 
-    for i in 0..n_qubits {
-        let g = if i == target { gate } else { &eye };
-        op = kron(&op, g);
+    for j in (0..n_qubits).rev() {
+        let g = if j == qubit_index { gate } else { &eye };
+        op = kron(g, &op);
     }
 
     op.dot(state)
 }
 
-/// Apply a controlled single-qubit gate
-pub fn apply_controlled_gate(state: &Array2<Complex64>, gate: &Array2<Complex64>, control: usize, target: usize, n_qubits: usize) -> Array2<Complex64> {
-    let p0 = Array2::<Complex64>::from_shape_vec((2, 2), vec![
-        Complex64::new(1.0, 0.0), Complex64::new(0.0, 0.0),
-        Complex64::new(0.0, 0.0), Complex64::new(0.0, 0.0),
-    ]).unwrap();
-
-    let p1 = Array2::<Complex64>::from_shape_vec((2, 2), vec![
-        Complex64::new(0.0, 0.0), Complex64::new(0.0, 0.0),
-        Complex64::new(0.0, 0.0), Complex64::new(1.0, 0.0),
-    ]).unwrap();
-
+/// Apply a controlled gate
+pub fn apply_controlled_gate(
+    state: &Array2<Complex64>,
+    gate: &Array2<Complex64>,
+    control: usize,
+    target: usize,
+    n_qubits: usize,
+) -> Array2<Complex64> {
+    let dim = 1 << n_qubits;
+    let mut new_state = Array2::<Complex64>::zeros((dim, 1));
     let eye = Array2::<Complex64>::eye(2);
 
-    let mut op0 = Array2::<Complex64>::from_shape_vec((1,1), vec![Complex64::new(1.0,0.0)]).unwrap();
-    let mut op1 = Array2::<Complex64>::from_shape_vec((1,1), vec![Complex64::new(1.0,0.0)]).unwrap();
-
-    for i in 0..n_qubits {
-        let g0 = if i == control { &p0 } else { &eye };
-        let g1 = if i == control { &p1 } else if i == target { gate } else { &eye };
-
-        op0 = kron(&op0, g0);
-        op1 = kron(&op1, g1);
+    // Loop over basis states
+    for i in 0..dim {
+        let control_bit = (i >> (n_qubits - 1 - control)) & 1;
+        if control_bit == 1 {
+            let mut op = Array2::<Complex64>::from_shape_vec((1, 1), vec![Complex64::new(1.0, 0.0)]).unwrap();
+            for j in (0..n_qubits).rev() {
+                let g = if j == target { gate } else { &eye };
+                op = kron(g, &op);
+            }
+            new_state += &op.dot(state);
+            break; // full matrix applied, exit loop
+        } else {
+            new_state[[i, 0]] = state[[i, 0]];
+        }
     }
 
-    let u = &op0 + &op1;
-    u.dot(state)
+    new_state
 }
 
 /// Quantum circuit struct
@@ -81,6 +88,12 @@ impl QuantumCircuit {
     /// Apply Pauli-X gate
     pub fn x(&mut self, qubit_index: usize) {
         self.state = apply_gate(&self.state, &pauli_x(), qubit_index, self.n);
+    }
+
+    /// Apply CNOT gate
+    pub fn cx(&mut self, control: usize, target: usize) {
+        let x = pauli_x();
+        self.state = apply_controlled_gate(&self.state, &x, control, target, self.n);
     }
 
     /// Measure the quantum state (returns a bitstring)
