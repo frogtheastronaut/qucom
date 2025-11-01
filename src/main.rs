@@ -2,45 +2,39 @@ use qucom_rs::circuits::QuantumCircuit;
 use qucom_rs::visualise::{state_probabilities, plot_probabilities};
 
 fn main() {
-    // 1. Create a 3-qubit circuit
+    // Create a 3-qubit circuit
     let mut qc = QuantumCircuit::new(3);
-    println!("Initial state |000>:");
-    println!("{:?}", qc.state);
 
-    // 2. Apply Hadamard to qubit 0 (create superposition)
-    qc.h(0);
-    println!("\nAfter applying H to qubit 0:");
-    println!("{:?}", qc.state);
+    // Initialize all qubits in superposition
+    qc.h_all();
 
-    // 3. Apply Hadamard to qubit 1
-    qc.h(1);
-    println!("\nAfter applying H to qubit 1:");
-    println!("{:?}", qc.state);
+    // Mark the target state |101> (decimal 5)
+    let target = 5;
 
-    // 4. Apply Hadamard to qubit 2
-    qc.h(2);
-    println!("\nAfter applying H to qubit 2:");
-    println!("{:?}", qc.state);
+    // Optimal number of Grover iterations
+    let n_qubits = 3;
+    let iterations = ((std::f64::consts::PI / 4.0) * (1 << n_qubits) as f64).sqrt().round() as usize;
 
-    // 5. Apply CNOT with qubit 0 as control and qubit 1 as target
-    qc.cx(0, 1);
-    println!("\nAfter applying CNOT (control: qubit 0, target: qubit 1):");
-    println!("{:?}", qc.state);
+    // Apply Grover iterations
+    for _ in 0..iterations {
+        qc.apply_oracle(target);
+        qc.diffuser();
+    }
 
-    // 6. Measure
+    // Measure once
     let result = qc.measure();
-    println!("\nMeasurement result: {}", result);
+    println!("Single measurement result: {}", result);
 
-    // 7. Run multiple measurements to see probabilities
-    println!("\nSampling measurement 10 times:");
+    // Sample multiple measurements to see probability distribution
+    println!("Sampling 10 measurements:");
     for _ in 0..10 {
         println!("{}", qc.measure());
     }
 
-    // 8. Visualise state probabilities
+    // Visualize probabilities (optional)
     let probs = state_probabilities(&qc.state);
     match plot_probabilities(&probs, "output.png") {
-        Ok(_) => println!("\nProbability distribution plot saved.'"),
-        Err(e) => eprintln!("Error generating plot: {}", e),
+        Ok(_) => println!("Probability distribution plot saved."),
+        Err(e) => eprintln!("Plotting error: {}", e),
     }
 }

@@ -3,7 +3,9 @@ pub mod pauli_x;
 pub mod pauli_z;
 pub mod s;
 pub mod t;
-
+pub mod cnot;
+pub mod hadamard_all;
+pub mod mcz;
 
 pub use hadamard::hadamard;
 pub use pauli_x::pauli_x;
