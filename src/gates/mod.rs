@@ -1,8 +1,15 @@
 pub mod hadamard;
 pub mod pauli_x;
+pub mod pauli_z;
+pub mod s;
+pub mod t;
+
 
 pub use hadamard::hadamard;
 pub use pauli_x::pauli_x;
+pub use pauli_z::pauli_z;
+pub use s::s;
+pub use t::t;
 
 use ndarray::Array2;
 use num_complex::Complex64;
