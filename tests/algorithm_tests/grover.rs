@@ -2,22 +2,13 @@ use qucom_rs::circuits::QuantumCircuit;
 use qucom_rs::visualise::{state_probabilities, plot_probabilities};
 
 /// Test Grover's Search Algorithm
-/// Expected result: 101 should have highest probability, the test should pass
+/// Expected result: 101 should have highest probability
 #[test]
 fn grover_search_test() {
     let mut qc = QuantumCircuit::new(3);
-
-    qc.h_all();
-
     let target = 5;
 
-    let n_qubits = 3;
-    let iterations = ((std::f64::consts::PI / 4.0) * (1 << n_qubits) as f64).sqrt().round() as usize;
-
-    for _ in 0..iterations {
-        qc.apply_oracle(target);
-        qc.diffuser();
-    }
+    qc.grover_search(target, None);
 
     let result = qc.measure();
     println!("Single measurement result: {}", result);

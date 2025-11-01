@@ -6,6 +6,7 @@ pub mod t;
 pub mod cnot;
 pub mod hadamard_all;
 pub mod mcz;
+pub mod x_all;
 
 pub use hadamard::hadamard;
 pub use pauli_x::pauli_x;
