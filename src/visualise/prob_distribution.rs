@@ -3,7 +3,7 @@ use num_complex::Complex64;
 use plotters::prelude::*;
 use std::collections::HashMap;
 
-/// Compute exact probabilities for each computational basis state from a state vector
+/// Compute exact probabilities for each basis state
 pub fn state_probabilities(state: &Array2<Complex64>) -> HashMap<String, f64> {
     let n_qubits = (state.len() as f64).log2() as usize;
     let mut probs = HashMap::new();
@@ -23,7 +23,7 @@ pub fn plot_probabilities(
 ) -> Result<(), Box<dyn std::error::Error>> {
     // Collect keys in a consistent sorted order
     let mut states: Vec<String> = probs.keys().cloned().collect();
-    states.sort(); // optional: |000>, |001>, |010>, ...
+    states.sort();
 
     let max_prob = probs.values().cloned().fold(0.0 / 0.0, f64::max);
 
