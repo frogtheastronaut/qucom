@@ -20,7 +20,7 @@ impl QuantumCircuit {
         });
 
 		for _ in 0..iterations {
-			self.apply_oracle(target);
+			self.apply_grover_oracle(target);
 			self.diffuser();
 		}
 	}
