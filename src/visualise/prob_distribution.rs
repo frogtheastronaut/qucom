@@ -3,7 +3,7 @@ use num_complex::Complex64;
 use plotters::prelude::*;
 use std::collections::HashMap;
 
-/// Compute probabilities of each basis state
+/// compute state probabilities from state vector
 pub fn state_probabilities(state: &Array2<Complex64>) -> HashMap<String, f64> {
     let n_qubits = (state.len() as f64).log2() as usize;
     let mut probs = HashMap::new();
@@ -14,12 +14,12 @@ pub fn state_probabilities(state: &Array2<Complex64>) -> HashMap<String, f64> {
     probs
 }
 
-/// Plot probabilities as a bar chart with labels
+/// plot probabilities as a bar chart
 pub fn plot_probabilities(
     probs: &HashMap<String, f64>,
     filename: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    // Sort states in lexicographical order
+    
     let mut states: Vec<String> = probs.keys().cloned().collect();
     states.sort();
 
@@ -35,7 +35,7 @@ pub fn plot_probabilities(
         .y_label_area_size(50)
         .build_cartesian_2d(-0.5..(states.len() as f64 - 0.5), 0.0..(max_prob * 1.2))?;
 
-    // Draw x-axis labels and mesh
+    
     chart
         .configure_mesh()
         .disable_mesh()
@@ -52,18 +52,18 @@ pub fn plot_probabilities(
         .x_desc("State")
         .draw()?;
 
-    // Draw bars and value labels
+    
     for (idx, state) in states.iter().enumerate() {
         let p = probs[state];
         let bar_width = 0.8;
 
-        // Draw bar
+        
         chart.draw_series(std::iter::once(Rectangle::new(
             [(idx as f64 - bar_width / 2.0, 0.0), (idx as f64 + bar_width / 2.0, p)],
             BLUE.filled(),
         )))?;
 
-        // Draw label above bar
+        
         chart.draw_series(std::iter::once(Text::new(
             format!("{:.2}", p),
             (idx as f64, p + 0.01),

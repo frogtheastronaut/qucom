@@ -1,6 +1,7 @@
 use ndarray::Array2;
 use num_complex::Complex64;
 
+/// kronecker product of two matrices
 pub fn kron(a: &Array2<Complex64>, b: &Array2<Complex64>) -> Array2<Complex64> {
     let (a_rows, a_cols) = a.dim();
     let (b_rows, b_cols) = b.dim();

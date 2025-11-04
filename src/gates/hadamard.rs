@@ -2,7 +2,7 @@ use ndarray::Array2;
 use num_complex::Complex64;
 use std::f64;
 use crate::circuits::QuantumCircuit;
-use crate::gates::apply_gate;
+use crate::qasm::generator::QasmInstruction;
 
 /// Hadamard gate
 pub fn hadamard() -> Array2<Complex64> {
@@ -17,8 +17,16 @@ pub fn hadamard() -> Array2<Complex64> {
 }
 
 impl QuantumCircuit {
-    /// Apply Hadamard gate
-    pub fn h(&mut self, qubit_index: usize) {
-        self.state = apply_gate(&self.state, &hadamard(), qubit_index, self.n);
+    /// add Hadamard gate to circuit
+    pub fn h(&mut self, qubit_index: usize) -> &mut Self {
+        self.add_instruction(QasmInstruction::H(qubit_index));
+        self
+    }
+    /// add Hadamard gate to multiple qubits
+    pub fn h_multi(&mut self, range: std::ops::Range<usize>) -> &mut Self {
+        for qubit in range {
+            self.h(qubit);
+        }
+        self
     }
 }

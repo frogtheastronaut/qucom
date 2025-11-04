@@ -1,3 +1,4 @@
 fn main() {
-    println!("To use the QUCOM SDK, please refer to the documentation and examples.");
+    println!("Hello, QUCOM!");
+    println!("You can run some tests, or get started")
 }

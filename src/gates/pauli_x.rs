@@ -1,7 +1,7 @@
 use ndarray::Array2;
 use num_complex::Complex64;
 use crate::circuits::QuantumCircuit;
-use crate::gates::apply_gate;
+use crate::qasm::generator::QasmInstruction;
 
 /// Pauli-X gate
 pub fn pauli_x() -> Array2<Complex64> {
@@ -15,8 +15,10 @@ pub fn pauli_x() -> Array2<Complex64> {
 }
 
 impl QuantumCircuit {
-    /// Apply Pauli-X gate
-    pub fn x(&mut self, qubit_index: usize) {
-        self.state = apply_gate(&self.state, &pauli_x(), qubit_index, self.n);
+    /// add Pauli-X gate to circuit
+    pub fn x(&mut self, qubit_index: usize) -> &mut Self {
+        self.add_instruction(QasmInstruction::X(qubit_index));
+        self
     }
 }
+

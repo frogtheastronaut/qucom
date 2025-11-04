@@ -2,7 +2,7 @@ use ndarray::Array2;
 use num_complex::Complex64;
 use std::f64::consts::PI;
 use crate::circuits::QuantumCircuit;
-use crate::gates::apply_gate;
+use crate::qasm::generator::QasmInstruction;
 
 /// T gate
 pub fn t() -> Array2<Complex64> {
@@ -16,8 +16,9 @@ pub fn t() -> Array2<Complex64> {
 }
 
 impl QuantumCircuit {
-	/// Apply T gate
-	pub fn t(&mut self, qubit_index: usize) {
-		self.state = apply_gate(&self.state, &t(), qubit_index, self.n);
+	/// add T gate to circuit
+	pub fn t(&mut self, qubit_index: usize) -> &mut Self {
+		self.add_instruction(QasmInstruction::T(qubit_index));
+		self
 	}
 }

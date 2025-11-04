@@ -1,27 +1,40 @@
 use crate::circuits::QuantumCircuit;
 
 impl QuantumCircuit {
- 	/// Apply Grover diffusion operator
-    pub fn diffuser(&mut self) {
-        self.h_all();
-		self.x_all();
+ 	/// add Grover diffusion operator to circuit
+    pub fn diffuser(&mut self) -> &mut Self {
+        let n = self.n;
+        self.h_multi(0..n);
+        self.x_all();
         self.mcz();
         self.x_all();
-        self.h_all();
+        self.h_multi(0..n);
+        
+        self
     }
 
-	/// Grover Search
-	/// If iterations is None, it defaults to the optimal number of iterations
-	pub fn grover_search(&mut self, target: usize, iterations: Option<usize>) {
-		self.h_all();
+	/// build Grover Search circuit
+	/// if iterations is None, uses the optimal number: π/4 * sqrt(N)
+	pub fn grover_search(&mut self, target: usize, iterations: Option<usize>) -> &mut Self {
         let n_qubits = self.n;
+        
+		// calculate optimal number of iterations
         let iterations = iterations.unwrap_or_else(|| {
-            ((std::f64::consts::PI / 4.0) * (1 << n_qubits) as f64).sqrt().round() as usize
+            let n = 2_usize.pow(n_qubits as u32);
+            ((std::f64::consts::PI / 4.0) * (n as f64).sqrt()).round() as usize
         });
 
+		// initialize superposition
+		self.h_multi(0..n_qubits);
+
+		// apply Grover iterations
 		for _ in 0..iterations {
 			self.apply_grover_oracle(target);
 			self.diffuser();
 		}
+
+		// measure all qubits
+		self.measure();
+		self
 	}
 }
