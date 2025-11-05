@@ -5,12 +5,12 @@
   "main": "js/index.js",
   "files": [
     "js",
-    "pkg/web",
-    "pkg/node"
+    "pkg/**/*"
   ],
   "type": "module",
   "scripts": {
-    "build": "wasm-pack build --target bundler"
+    "build": "wasm-pack build --target bundler",
+    "prepublishOnly": "git add -f pkg/*"
   },
   "keywords": [
     "wasm",
