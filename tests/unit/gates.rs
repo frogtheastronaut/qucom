@@ -30,8 +30,6 @@ fn cnot_gate() {
     assert_eq!(qc.execute().first().unwrap(), "11");
 }
 
-
-
 #[test]
 fn phase_gates_no_basis_change() {
     let mut qc = QuantumCircuit::new(1);
