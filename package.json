@@ -5,7 +5,7 @@
   "main": "js/index.js",
   "files": [
     "pkg",
-    "js/index.js"
+    "js"
   ],
   "type": "module",
   "scripts": {
