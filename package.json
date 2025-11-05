@@ -1,19 +1,19 @@
 {
   "name": "qucom-sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "QUCOM - Quantum Computing SDK in JS/WASM",
   "main": "js/index.js",
-	"files": [
-	"js",
-	"pkg/web",
-	"pkg/node"
-	],
+  "files": [
+    "js",
+    "pkg/web",
+    "pkg/node"
+  ],
   "type": "module",
-"scripts": {
-"build:web": "wasm-pack build --target web --out-dir pkg/web",
-"build:node": "wasm-pack build --target nodejs --out-dir pkg/node",
-"build": "npm run build:web && npm run build:node"
-},
+  "scripts": {
+    "build:web": "wasm-pack build --target web --out-dir pkg/web",
+    "build:node": "wasm-pack build --target nodejs --out-dir pkg/node",
+    "build": "npm run build:web && npm run build:node"
+  },
   "keywords": [
     "wasm",
     "rust",
