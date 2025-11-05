@@ -4,7 +4,15 @@
  * This code is licensed under the MIT license.
  */
 
-import init, * as wasm from '../pkg/qucom_rs.js';
+let init, wasm;
+
+if (typeof window !== 'undefined') {
+  // Browser
+  ({ default: init, ...wasm } = await import('../pkg/web/qucom_rs.js'));
+} else {
+  // Node
+  ({ default: init, ...wasm } = await import('../pkg/node/qucom_rs.js'));
+}
 
 let wasmInitialized = false;
 
@@ -13,10 +21,10 @@ let wasmInitialized = false;
  * @returns {Promise<void>}
  */
 export async function initialize() {
-    if (!wasmInitialized) {
-        await init();
-        wasmInitialized = true;
-    }
+  if (!wasmInitialized) {
+    await init();
+    wasmInitialized = true;
+  }
 }
 
 /**
@@ -365,4 +373,4 @@ export const utils = {
     }
 };
 
-export * from '../pkg/qucom_rs.js';
+export * from wasm;

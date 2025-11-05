@@ -1,0 +1,34 @@
+/* tslint:disable */
+/* eslint-disable */
+export const memory: WebAssembly.Memory;
+export const __wbg_quantumcircuit_free: (a: number, b: number) => void;
+export const quantumcircuit_new: (a: number) => number;
+export const quantumcircuit_h: (a: number, b: number) => void;
+export const quantumcircuit_x: (a: number, b: number) => void;
+export const quantumcircuit_y: (a: number, b: number) => void;
+export const quantumcircuit_z: (a: number, b: number) => void;
+export const quantumcircuit_s: (a: number, b: number) => void;
+export const quantumcircuit_t: (a: number, b: number) => void;
+export const quantumcircuit_cx: (a: number, b: number, c: number) => void;
+export const quantumcircuit_toffoli: (a: number, b: number, c: number) => void;
+export const quantumcircuit_mcx: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
+export const quantumcircuit_mcz: (a: number) => void;
+export const quantumcircuit_x_all: (a: number) => void;
+export const quantumcircuit_measure: (a: number) => void;
+export const quantumcircuit_measure_qubit: (a: number, b: number, c: number) => void;
+export const quantumcircuit_grover_search: (a: number, b: number, c: number) => void;
+export const quantumcircuit_diffuser: (a: number) => void;
+export const quantumcircuit_apply_grover_oracle: (a: number, b: number) => void;
+export const quantumcircuit_dj_oracle: (a: number, b: number) => void;
+export const quantumcircuit_parity_oracle: (a: number) => void;
+export const quantumcircuit_to_qasm: (a: number) => [number, number];
+export const quantumcircuit_execute: (a: number) => [number, number];
+export const quantumcircuit_reset: (a: number) => void;
+export const quantumcircuit_n_qubits: (a: number) => number;
+export const __wbindgen_exn_store: (a: number) => void;
+export const __externref_table_alloc: () => number;
+export const __wbindgen_externrefs: WebAssembly.Table;
+export const __wbindgen_malloc: (a: number, b: number) => number;
+export const __wbindgen_free: (a: number, b: number, c: number) => void;
+export const __externref_drop_slice: (a: number, b: number) => void;
+export const __wbindgen_start: () => void;
