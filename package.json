@@ -1,6 +1,6 @@
 {
   "name": "qucom-sdk",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "QUCOM - Quantum Computing SDK in JS/WASM",
   "main": "js/index.js",
   "files": [
@@ -10,9 +10,9 @@
   "type": "module",
   "scripts": {
     "build": "wasm-pack build --target bundler",
-  "preinstall": "rm -f pkg/.gitignore || true",
-  "prepack": "rm -f pkg/.gitignore || true",
-  "prepublishOnly": "rm -f pkg/.gitignore || true"
+    "preinstall": "rm -f pkg/.gitignore || true",
+    "prepack": "rm -f pkg/.gitignore || true",
+    "prepublishOnly": "rm -f pkg/.gitignore || true"
   },
   "keywords": [
     "wasm",
