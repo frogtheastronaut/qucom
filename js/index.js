@@ -373,4 +373,9 @@ export const utils = {
     }
 };
 
-export * from wasm;
+export function getWasm() {
+  if (!wasmInitialized) {
+    throw new Error('[QUCOM] WASM not initialized. Call initialize() first.');
+  }
+  return wasm;
+}
