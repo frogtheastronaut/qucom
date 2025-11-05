@@ -1,0 +1,17 @@
+{
+  "name": "qucom-sdk",
+  "version": "0.1.0",
+  "description": "QUCOM - Quantum Computing SDK in JS/WASM",
+  "main": "js/index.js",
+  "files": [
+    "pkg",
+    "js/index.js"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "wasm-pack build --target web"
+  },
+  "keywords": ["wasm", "rust", "quantum", "sdk"],
+  "author": "Ethan Zhang",
+  "license": "MIT"
+}

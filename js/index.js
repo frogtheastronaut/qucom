@@ -4,7 +4,7 @@
  * This code is licensed under the MIT license.
  */
 
-import init, * as wasm from './qucom_rs.js';
+import init, * as wasm from '../pkg/qucom_rs.js';
 
 let wasmInitialized = false;
 
@@ -364,3 +364,5 @@ export const utils = {
         return decimal.toString(2).padStart(width, '0');
     }
 };
+
+export * from '../pkg/qucom_rs.js';
