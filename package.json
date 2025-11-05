@@ -10,7 +10,9 @@
   "type": "module",
   "scripts": {
     "build": "wasm-pack build --target bundler",
-    "prepublishOnly": "git add -f pkg/*"
+  "preinstall": "rm -f pkg/.gitignore || true",
+  "prepack": "rm -f pkg/.gitignore || true",
+  "prepublishOnly": "rm -f pkg/.gitignore || true"
   },
   "keywords": [
     "wasm",
