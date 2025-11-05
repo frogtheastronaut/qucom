@@ -1,6 +1,6 @@
 {
   "name": "qucom-sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "QUCOM - Quantum Computing SDK in JS/WASM",
   "main": "js/index.js",
   "files": [
