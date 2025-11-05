@@ -10,9 +10,7 @@
   ],
   "type": "module",
   "scripts": {
-    "build:web": "wasm-pack build --target web --out-dir pkg/web",
-    "build:node": "wasm-pack build --target nodejs --out-dir pkg/node",
-    "build": "npm run build:web && npm run build:node"
+    "build": "wasm-pack build --target bundler"
   },
   "keywords": [
     "wasm",
