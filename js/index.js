@@ -10,9 +10,6 @@ if (isNode) {
   wasm = await import("../pkg/web/qucom_rs.js");
 }
 
-
-import * as wasm from '../pkg/qucom_rs.js';
-
 export class QuantumCircuit {
   constructor(nQubits) {
     this._circuit = new wasm.QuantumCircuit(nQubits);
