@@ -6,22 +6,25 @@
   <body style="font-family: system-ui; margin: 2rem;">
     <pre id="output">Loading...</pre>
 
-    <script type="module" src="https://cdn.jsdelivr.net/npm/qucom-sdk@latest/pkg/qucom_rs.js"></script>
-
     <script type="module">
-      import { circuits } from "qucom-sdk";
+      import * as qucom from 'https://cdn.jsdelivr.net/npm/qucom-sdk@latest/js/index.js'; // adjust path
 
       const log = (msg) => {
         document.getElementById("output").textContent += msg + "\n";
       };
 
+      // List all top-level exports from your wrapper
+      log("Top-level exports:");
+      log(Object.keys(qucom).join("\n"));
+      log("\n");
+
       async function runDeutschJozsa() {
         try {
           log("Initializing Deutsch–Jozsa circuit...");
 
-          const circuit = circuits.deutschJozsa(2, "balanced");
+          // Use the pre-built circuit from your wrapper
+          const circuit = qucom.circuits.deutschJozsa(2, true); // true = balanced
 
-          circuit.measure();
           const result = circuit.execute();
 
           log("Execution complete!");
