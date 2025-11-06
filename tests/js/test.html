@@ -8,6 +8,7 @@
 
     <script type="module">
       import * as qucom from 'https://cdn.jsdelivr.net/npm/qucom-sdk@latest/js/index.js'; // adjust path
+      await qucom.wasm.default()
 
       const log = (msg) => {
         document.getElementById("output").textContent += msg + "\n";

@@ -13,7 +13,6 @@ export async function init() {
   }
 }
 
-
 export class QuantumCircuit {
   constructor(nQubits) {
     this._circuit = new wasm.QuantumCircuit(nQubits);
@@ -97,5 +96,3 @@ export const utils = {
     return decimal.toString(2).padStart(width, '0');
   }
 };
-
-export { wasm };
