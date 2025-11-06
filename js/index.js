@@ -4,6 +4,8 @@
 */
 const isNode = typeof process !== "undefined" && process.versions?.node;
 
+let wasm;
+
 if (isNode) {
   wasm = await import("../pkg/node/qucom_rs.js");
 } else {
