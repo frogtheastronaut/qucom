@@ -6,8 +6,10 @@
   <body style="font-family: system-ui; margin: 2rem;">
     <pre id="output">Loading...</pre>
 
+    <script type="module" src="https://cdn.jsdelivr.net/npm/qucom-sdk@latest/pkg/qucom_rs.js"></script>
+
     <script type="module">
-      import { circuits } from "https://raw.githubusercontent.com/frogtheastronaut/qucom/refs/heads/main/pkg/qucom_rs.js";
+      import { circuits } from "qucom-sdk";
 
       const log = (msg) => {
         document.getElementById("output").textContent += msg + "\n";

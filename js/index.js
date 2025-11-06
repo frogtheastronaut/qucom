@@ -2,6 +2,14 @@
     QUCOM - Quantum Computing SDK in JS/WASM
     A JavaScript library for quantum computing using WebAssembly.
 */
+const isNode = typeof process !== "undefined" && process.versions?.node;
+
+if (isNode) {
+  wasm = await import("../pkg/node/qucom_rs.js");
+} else {
+  wasm = await import("../pkg/web/qucom_rs.js");
+}
+
 
 import * as wasm from '../pkg/qucom_rs.js';
 

@@ -5,18 +5,13 @@
   "main": "js/index.js",
   "files": [
     "js",
-    "pkg/qucom_rs_bg.wasm",
-    "pkg/qucom_rs.js",
-    "pkg/qucom_rs_bg.js",
-    "pkg/package.json",
-    "pkg/README.md",
-    "pkg/qucom_rs_bg.wasm.d.ts",
-    "pkg/qucom_rs.d.ts"
+    "pkg"
   ],
   "type": "module",
   "scripts": {
-    "build": "wasm-pack build --target nodejs",
-    "prepare": "wasm-pack build --target nodejs"
+    "build:web": "wasm-pack build --target web --out-dir pkg/web && rm -rf pkg/web/.gitignore",
+    "build:node": "wasm-pack build --target nodejs --out-dir pkg/node && rm -rf pkg/node/.gitignore",
+    "build": "npm run build:web && npm run build:node"
   },
   "keywords": [
     "wasm",
