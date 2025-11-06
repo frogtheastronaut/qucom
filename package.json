@@ -15,9 +15,8 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "wasm-pack build --target bundler",
-    "prepare": "wasm-pack build --target bundler",
-    "prepack": "rm -f pkg/.gitignore || true"
+    "build": "wasm-pack build --target nodejs",
+    "prepare": "wasm-pack build --target nodejs"
   },
   "keywords": [
     "wasm",
