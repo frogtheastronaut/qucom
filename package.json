@@ -26,5 +26,8 @@
     "sdk"
   ],
   "author": "Ethan Zhang",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "qucom-sdk": "^0.1.9"
+  }
 }
