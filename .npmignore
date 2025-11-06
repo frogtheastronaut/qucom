@@ -1,2 +1,3 @@
-# ignore
-!pkg/
+!pkg/**
+node_modules/
+target/
