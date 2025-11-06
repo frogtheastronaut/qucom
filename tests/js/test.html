@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
   </head>
   <body style="font-family: system-ui; margin: 2rem;">
-    <pre id="output">Loading...</pre>
+    <pre id="output"></pre>
 
     <script type="module">
       import * as qucom from 'https://cdn.jsdelivr.net/npm/qucom-sdk@latest/js/index.js'; // adjust path
@@ -13,12 +13,6 @@
       const log = (msg) => {
         document.getElementById("output").textContent += msg + "\n";
       };
-
-      // List all top-level exports from your wrapper
-      log("Top-level exports:");
-      log(Object.keys(qucom).join("\n"));
-      log("\n");
-
       async function runDeutschJozsa() {
         try {
           log("Initializing Deutsch–Jozsa circuit...");

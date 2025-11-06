@@ -1,4 +1,4 @@
-import { QuantumCircuit, circuits, utils } from 'qucom-sdk';
+import { init, QuantumCircuit, circuits, utils } from 'qucom-sdk';
 
 /* 
 
@@ -10,6 +10,7 @@ All scripts are pre-tested in Rust, so no need to test quantum logic here.
 */
 async function main() {
     try {
+        await init();
         const bellCircuit = circuits.bell();
         console.log('Bell state circuit created');
 
