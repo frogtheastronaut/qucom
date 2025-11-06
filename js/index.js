@@ -3,20 +3,6 @@
     A JavaScript library for quantum computing using WebAssembly.
 */
 
-// suppress experimental wasm warnings
-// this package doesnt work without experimental wasm
-
-const originalEmitWarning = process.emitWarning;
-process.emitWarning = function(warning, type, code, ...args) {
-  if (
-    code === 'WASM_MODULE_IMPORT' ||
-    (typeof warning === 'string' && warning.includes('WebAssembly'))
-  ) {
-    return; // suppress wasm warnings
-  }
-  return originalEmitWarning.call(process, warning, type, code, ...args);
-};
-
 import * as wasm from '../pkg/qucom_rs.js';
 
 export class QuantumCircuit {

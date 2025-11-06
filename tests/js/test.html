@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body style="font-family: system-ui; margin: 2rem;">
+    <pre id="output">Loading...</pre>
+
+    <script type="module">
+      import { circuits } from "https://cdn.jsdelivr.net/npm/qucom-sdk@0.1.8/js/index.js";
+
+      const log = (msg) => {
+        document.getElementById("output").textContent += msg + "\n";
+      };
+
+      async function runDeutschJozsa() {
+        try {
+          log("Initializing Deutsch–Jozsa circuit...");
+
+          const circuit = circuits.deutschJozsa(2, "balanced");
+
+          circuit.measure();
+          const result = circuit.execute();
+
+          log("Execution complete!");
+          log("Measurement results:");
+          log(JSON.stringify(result, null, 2));
+          log("\nQASM output:");
+          log(circuit.toQASM());
+        } catch (err) {
+          log("Error: " + err);
+          console.error(err);
+        }
+      }
+
+      runDeutschJozsa();
+    </script>
+  </body>
+</html>
