@@ -1,6 +1,6 @@
 {
   "name": "qucom-sdk",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "QUCOM - Quantum Computing SDK in JS/WASM",
   "main": "js/index.js",
   "files": [
@@ -12,15 +12,13 @@
     "pkg/README.md",
     "pkg/qucom_rs_bg.wasm.d.ts",
     "pkg/qucom_rs.d.ts"
-
   ],
   "type": "module",
   "scripts": {
     "build": "wasm-pack build --target bundler",
-    "prepare": "wasm-pack build --target bundler", 
+    "prepare": "wasm-pack build --target bundler",
     "prepack": "rm -f pkg/.gitignore || true"
   },
-
   "keywords": [
     "wasm",
     "rust",
