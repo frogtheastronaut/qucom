@@ -1,22 +1,34 @@
 pub mod hadamard;
 pub mod pauli_x;
+pub mod pauli_y;
 pub mod pauli_z;
 pub mod s;
 pub mod t;
 pub mod cnot;
 pub mod mcz;
 pub mod x_all;
-pub mod pauli_y;
 pub mod toffoli;
 pub mod mcx;
+pub mod rx;
+pub mod ry;
+pub mod rz;
+pub mod phase;
+pub mod u;
+pub mod swap;
 
 pub use hadamard::hadamard;
 pub use pauli_x::pauli_x;
-pub use pauli_z::pauli_z;
-pub use s::s;
-pub use t::t;
 pub use pauli_y::pauli_y;
+pub use pauli_z::pauli_z;
+pub use s::{s, sdg};
+pub use t::{t, tdg};
 pub use toffoli::toffoli;
+pub use rx::rx;
+pub use ry::ry;
+pub use rz::rz;
+pub use phase::phase;
+pub use u::u_gate;
+pub use swap::{swap, apply_swap};
 
 
 use ndarray::Array2;

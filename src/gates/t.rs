@@ -10,7 +10,18 @@ pub fn t() -> Array2<Complex64> {
 		(2, 2),
 		vec![
 			Complex64::new(1.0, 0.0), Complex64::new(0.0, 0.0),
-			Complex64::new(0.0, 0.0), Complex64::new((PI/4.0).cos(), (PI/4.0).sin()),
+			Complex64::new(0.0, 0.0), Complex64::from_polar(1.0, PI / 4.0),
+		],
+	).unwrap()
+}
+
+/// T dagger gate
+pub fn tdg() -> Array2<Complex64> {
+	Array2::from_shape_vec(
+		(2, 2),
+		vec![
+			Complex64::new(1.0, 0.0), Complex64::new(0.0, 0.0),
+			Complex64::new(0.0, 0.0), Complex64::from_polar(1.0, -PI / 4.0),
 		],
 	).unwrap()
 }
@@ -18,7 +29,13 @@ pub fn t() -> Array2<Complex64> {
 impl QuantumCircuit {
 	/// add T gate to circuit
 	pub fn t(&mut self, qubit_index: usize) -> &mut Self {
-		self.add_instruction(QasmInstruction::T(qubit_index));
+		self.add_instruction(QasmInstruction::T(qubit_index, false));
+		self
+	}
+	
+	/// add T dagger gate to circuit
+	pub fn tdg(&mut self, qubit_index: usize) -> &mut Self {
+		self.add_instruction(QasmInstruction::T(qubit_index, true));
 		self
 	}
 }

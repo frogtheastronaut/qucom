@@ -1,2 +1,3 @@
-mod generation;
-mod execution;
+mod generator;
+mod parser;
+mod executor;

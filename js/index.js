@@ -13,7 +13,7 @@ export async function init() {
   }
 }
 
-export class QuantumCircuit {
+export class QuantumCircuit { 
   constructor(nQubits) {
     this._circuit = new wasm.QuantumCircuit(nQubits);
   }
