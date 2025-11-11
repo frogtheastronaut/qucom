@@ -8,32 +8,21 @@
 
     <script type="module">
       import * as qucom from 'https://cdn.jsdelivr.net/npm/qucom-sdk@latest/js/index.js'; // adjust path
-      await qucom.wasm.default()
+      
 
       const log = (msg) => {
         document.getElementById("output").textContent += msg + "\n";
       };
-      async function runDeutschJozsa() {
-        try {
-          log("Initializing Deutsch–Jozsa circuit...");
-
-          // Use the pre-built circuit from your wrapper
-          const circuit = qucom.circuits.deutschJozsa(2, true); // true = balanced
-
-          const result = circuit.execute();
-
-          log("Execution complete!");
-          log("Measurement results:");
-          log(JSON.stringify(result, null, 2));
-          log("\nQASM output:");
-          log(circuit.toQASM());
-        } catch (err) {
-          log("Error: " + err);
-          console.error(err);
-        }
+      log(Object.keys(qucom).join(", "));
+      await qucom.init();
+      await qucom.wasm.default();
+      function runCircuit() {
+        const circuit = new qucom.QuantumCircuit(1);
+        circuit.h(0).measure();
+        const results = circuit.execute();
+        log("Measurement result: " + results[0]);
       }
-
-      runDeutschJozsa();
+      runCircuit();
     </script>
   </body>
 </html>
